@@ -1,0 +1,69 @@
+{
+  "students": [
+    {
+      "id": "1",
+      "name": "Rahul Sharma",
+      "email": "rahul@gmail.com",
+      "course": "BCA",
+      "year": "2nd"
+    },
+    {
+      "id": "2",
+      "name": "Amit Patel",
+      "email": "amit@gmail.com",
+      "course": "BSc IT",
+      "year": "2nd"
+    },
+    {
+      "id": "3",
+      "name": "Priya Shah",
+      "email": "priya@gmail.com",
+      "course": "BCom",
+      "year": "3rd"
+    },
+    {
+      "name": "Mayank Patel",
+      "email": "maayaankpatel24@gmail.com",
+      "course": "bsc",
+      "year": "3rd",
+      "id": "ifnkIuMipqo"
+    }
+  ],
+  "teachers": [
+    {
+      "id": "1",
+      "name": "Rajesh Sir",
+      "email": "rajesh@gmail.com",
+      "subject": "ReactJS",
+      "experience": "5 Years"
+    },
+    {
+      "id": "2",
+      "name": "Meena Madam",
+      "email": "meena@gmail.com",
+      "subject": "Java",
+      "experience": "7 Years"
+    }
+  ],
+  "courses": [
+    {
+      "id": "1",
+      "name": "BCA",
+      "duration": "3 Years",
+      "fees": 50000
+    },
+    {
+      "id": "2",
+      "name": "BSc IT",
+      "duration": "3 Years",
+      "fees": 60000
+    },
+    {
+      "id": "3",
+      "name": "BCom",
+      "duration": "3 Years",
+      "fees": 40000
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
