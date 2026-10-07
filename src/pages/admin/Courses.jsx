@@ -39,7 +39,7 @@ function Courses() {
   );
 
   return (
-    <Layout>
+    <Layout variant="admin">
       <div className="d-flex justify-content-between mb-4">
         <h2>Courses Management</h2>
 

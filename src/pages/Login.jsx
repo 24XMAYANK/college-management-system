@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import "../styles/login.css";
 
 function Login() {
   const navigate = useNavigate();
@@ -13,6 +14,7 @@ function Login() {
   });
 
   const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     if (user) {
@@ -54,110 +56,152 @@ function Login() {
   };
 
   return (
-    <div className="container">
+    <main className="login-page">
 
-      <div className="row justify-content-center align-items-center vh-100">
+      <div
+        className="login-page__overlay"
+        aria-hidden="true"
+      />
 
-        <div className="col-md-5">
+      {/* University branding */}
+      <div className="login-brand">
+        <span className="login-brand__small">
+          random
+        </span>
 
-          <div className="card shadow-lg">
+        <span className="login-brand__name">
+          UNIVERSITY.
+        </span>
+      </div>
 
-            <div className="card-header bg-primary text-white text-center">
+      {/* Login card */}
+      <section
+        className="login-card"
+        aria-labelledby="login-title"
+      >
 
-              <h2>College Management System</h2>
+        <div className="login-card__content">
+
+          <h1 id="login-title">
+            Login
+          </h1>
+
+          {error && (
+            <div
+              className="login-error"
+              role="alert"
+            >
+              {error}
+            </div>
+          )}
+
+          <form
+            onSubmit={handleSubmit}
+            noValidate
+          >
+
+            {/* Email */}
+            <div className="login-field">
+
+              <span
+                className="login-field__icon"
+                aria-hidden="true"
+              >
+                ✉
+              </span>
+
+              <input
+                type="text"
+                name="email"
+                placeholder="Email ID / enrollment No"
+                value={formData.email}
+                onChange={handleChange}
+                autoComplete="username"
+                aria-label="Email ID or enrollment number"
+              />
 
             </div>
 
-            <div className="card-body p-4">
+            {/* Password */}
+            <div className="login-field">
 
-              <h4 className="text-center mb-4">
-                Login
-              </h4>
+              <span
+                className="login-field__icon login-lock-icon"
+                aria-hidden="true"
+              >
+                🔒
+              </span>
 
-              {error && (
-                <div className="alert alert-danger">
-                  {error}
-                </div>
-              )}
+              <input
+                type={
+                  showPassword
+                    ? "text"
+                    : "password"
+                }
+                name="password"
+                placeholder="Password"
+                value={formData.password}
+                onChange={handleChange}
+                autoComplete="current-password"
+                aria-label="Password"
+              />
 
-              <form onSubmit={handleSubmit}>
-
-                <div className="mb-3">
-
-                  <label className="form-label">
-                    Email
-                  </label>
-
-                  <input
-                    type="email"
-                    className="form-control"
-                    placeholder="Enter Email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                  />
-
-                </div>
-
-                <div className="mb-4">
-
-                  <label className="form-label">
-                    Password
-                  </label>
-
-                  <input
-                    type="password"
-                    className="form-control"
-                    placeholder="Enter Password"
-                    name="password"
-                    value={formData.password}
-                    onChange={handleChange}
-                  />
-
-                </div>
-
-                <button
-                  type="submit"
-                  className="btn btn-primary w-100"
-                >
-                  Login
-                </button>
-
-              </form>
-
-              <hr />
-
-              <div className="text-center">
-
-                <p className="fw-bold">
-                  Demo Login
-                </p>
-
-                <small>
-
-                  Admin : admin@gmail.com / 123456
-
-                  <br />
-
-                  Teacher : teacher@gmail.com / 123456
-
-                  <br />
-
-                  Student : student@gmail.com / 123456
-
-                </small>
-
-              </div>
+              {/* Show / Hide password */}
+              <button
+                type="button"
+                className="login-field__toggle"
+                onClick={() =>
+                  setShowPassword(
+                    (visible) => !visible
+                  )
+                }
+                aria-label={
+                  showPassword
+                    ? "Hide password"
+                    : "Show password"
+                }
+              >
+                {showPassword ? "◉" : "◌"}
+              </button>
 
             </div>
+
+            {/* Login */}
+            <button
+              type="submit"
+              className="login-submit"
+            >
+              Login
+            </button>
+
+          </form>
+
+          {/* Demo login */}
+          <div className="login-demo">
+
+            <strong>
+              Demo Login
+            </strong>
+
+            <span>
+              Admin : admin@gmail.com / 123456
+            </span>
+
+            <span>
+              Teacher : teacher@gmail.com / 123456
+            </span>
+
+            <span>
+              Student : student@gmail.com / 123456
+            </span>
 
           </div>
 
         </div>
 
-      </div>
+      </section>
 
-    </div>
+    </main>
   );
 }
 

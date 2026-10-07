@@ -1,32 +1,31 @@
-import { FaBuilding, FaPlus, FaUsers, FaBook } from "react-icons/fa";
+import {
+  FaGraduationCap,
+  FaCalendarAlt,
+  FaBook,
+  FaClock,
+} from "react-icons/fa";
 import Layout from "../../components/Layout";
 import "../../styles/admin-modules.css";
 
-function Departments() {
-  const departments = [
+function Exams() {
+  const exams = [
     {
-      id: 1,
-      name: "Computer Science",
-      code: "CS",
-      students: 0,
-      courses: 0,
-      status: "Active",
+      name: "Mid Semester Examination",
+      course: "Academic Examination",
+      date: "12 Oct 2026",
+      status: "Upcoming",
     },
     {
-      id: 2,
-      name: "Bachelor of Commerce",
-      code: "BCOM",
-      students: 0,
-      courses: 0,
-      status: "Active",
+      name: "Internal Examination",
+      course: "Academic Examination",
+      date: "18 Oct 2026",
+      status: "Upcoming",
     },
     {
-      id: 3,
-      name: "Bachelor of Science",
-      code: "BSC",
-      students: 0,
-      courses: 0,
-      status: "Active",
+      name: "Semester Examination",
+      course: "Academic Examination",
+      date: "02 Nov 2026",
+      status: "Upcoming",
     },
   ];
 
@@ -37,15 +36,15 @@ function Departments() {
         <div className="admin-module-header">
           <div>
             <span className="admin-module-eyebrow">
-              ACADEMIC MANAGEMENT
+              EXAMINATION MANAGEMENT
             </span>
-            <h1>Departments</h1>
-            <p>Manage college departments and academic programs.</p>
+            <h1>Exams</h1>
+            <p>Manage examinations and academic schedules.</p>
           </div>
 
           <button className="admin-primary-button">
-            <FaPlus />
-            Add Department
+            <FaGraduationCap />
+            Add Exam
           </button>
         </div>
 
@@ -53,21 +52,21 @@ function Departments() {
 
           <div className="admin-module-stat">
             <div className="admin-module-stat-icon purple">
-              <FaBuilding />
+              <FaGraduationCap />
             </div>
             <div>
-              <span>Total Departments</span>
-              <strong>{departments.length}</strong>
+              <span>Total Exams</span>
+              <strong>{exams.length}</strong>
             </div>
           </div>
 
           <div className="admin-module-stat">
             <div className="admin-module-stat-icon blue">
-              <FaUsers />
+              <FaCalendarAlt />
             </div>
             <div>
-              <span>Total Students</span>
-              <strong>—</strong>
+              <span>Upcoming</span>
+              <strong>{exams.length}</strong>
             </div>
           </div>
 
@@ -76,7 +75,7 @@ function Departments() {
               <FaBook />
             </div>
             <div>
-              <span>Total Courses</span>
+              <span>Courses</span>
               <strong>—</strong>
             </div>
           </div>
@@ -87,8 +86,8 @@ function Departments() {
 
           <div className="admin-module-card-header">
             <div>
-              <h2>Department List</h2>
-              <p>All available departments</p>
+              <h2>Upcoming Exams</h2>
+              <p>Academic examination schedule</p>
             </div>
           </div>
 
@@ -98,31 +97,36 @@ function Departments() {
 
               <thead>
                 <tr>
-                  <th>ID</th>
-                  <th>Department</th>
-                  <th>Code</th>
-                  <th>Students</th>
-                  <th>Courses</th>
+                  <th>Exam</th>
+                  <th>Course</th>
+                  <th>Date</th>
                   <th>Status</th>
                   <th>Action</th>
                 </tr>
               </thead>
 
               <tbody>
-                {departments.map((department) => (
-                  <tr key={department.id}>
-                    <td>DEP{String(department.id).padStart(3, "0")}</td>
+                {exams.map((exam) => (
+                  <tr key={exam.name}>
                     <td>
-                      <strong>{department.name}</strong>
+                      <strong>{exam.name}</strong>
                     </td>
-                    <td>{department.code}</td>
-                    <td>{department.students || "—"}</td>
-                    <td>{department.courses || "—"}</td>
+
+                    <td>{exam.course}</td>
+
                     <td>
-                      <span className="admin-active-badge">
-                        {department.status}
+                      <span className="admin-date-text">
+                        <FaClock />
+                        {exam.date}
                       </span>
                     </td>
+
+                    <td>
+                      <span className="admin-active-badge">
+                        {exam.status}
+                      </span>
+                    </td>
+
                     <td>
                       <button className="admin-table-action">
                         View
@@ -143,4 +147,4 @@ function Departments() {
   );
 }
 
-export default Departments;
+export default Exams;

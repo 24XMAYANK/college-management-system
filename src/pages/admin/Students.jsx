@@ -49,7 +49,7 @@ function Students() {
   console.log("Students State:", students);
 
   return (
-    <Layout>
+    <Layout variant="admin">
 
       <div className="d-flex justify-content-between mb-3">
 

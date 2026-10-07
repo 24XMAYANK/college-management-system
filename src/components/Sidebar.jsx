@@ -1,179 +1,160 @@
 import { NavLink } from "react-router-dom";
+
 import {
   FaTachometerAlt,
   FaUserGraduate,
   FaChalkboardTeacher,
   FaBook,
+  FaBuilding,
+  FaMoneyBillWave,
   FaClipboardCheck,
-  FaChartBar,
+  FaGraduationCap,
+  FaBullhorn,
+  FaCalendarAlt,
+  FaFileAlt,
+  FaCog,
+  FaTimes,
   FaUserCircle,
 } from "react-icons/fa";
-import { useAuth } from "../context/AuthContext";
 
-function Sidebar() {
-  const { user } = useAuth();
+function Sidebar({
+  variant = "default",
+  isOpen = false,
+  onClose,
+}) {
+  // Admin sidebar sirf admin layout mein show hoga
+  const isAdmin = variant === "admin";
 
-  const linkClass = ({ isActive }) =>
-    `nav-link text-white mb-2 rounded ${
-      isActive ? "bg-primary" : ""
-    }`;
+  if (!isAdmin) {
+    return null;
+  }
+
+  const items = [
+    {
+      label: "Dashboard",
+      to: "/admin/dashboard",
+      icon: FaTachometerAlt,
+    },
+    {
+      label: "Students",
+      to: "/admin/students",
+      icon: FaUserGraduate,
+    },
+    {
+      label: "Teachers",
+      to: "/admin/teachers",
+      icon: FaChalkboardTeacher,
+    },
+    {
+      label: "Courses",
+      to: "/admin/courses",
+      icon: FaBook,
+    },
+    {
+      label: "Departments",
+      to: "/admin/departments",
+      icon: FaBuilding,
+    },
+    {
+      label: "Fees",
+      to: "/admin/fees",
+      icon: FaMoneyBillWave,
+    },
+    {
+      label: "Attendance",
+      to: "/admin/attendance",
+      icon: FaClipboardCheck,
+    },
+    {
+      label: "Exams",
+      to: "/admin/exams",
+      icon: FaGraduationCap,
+    },
+    {
+      label: "Notices",
+      to: "/admin/notices",
+      icon: FaBullhorn,
+    },
+    {
+      label: "Events",
+      to: "/admin/events",
+      icon: FaCalendarAlt,
+    },
+    {
+      label: "Reports",
+      to: "/admin/reports",
+      icon: FaFileAlt,
+    },
+    {
+      label: "Settings",
+      to: "/admin/settings",
+      icon: FaCog,
+    },
+  ];
 
   return (
-    <div
-      className="bg-dark text-white p-3"
-      style={{
-        width: "250px",
-        minHeight: "100vh",
-      }}
+    <aside
+      className={`admin-sidebar ${
+        isOpen ? "is-open" : ""
+      }`}
     >
-      <h4 className="text-center mb-4">
-        CMS Panel
-      </h4>
+      {/* Mobile Sidebar Header */}
+      <div className="admin-sidebar__mobile-header">
+        <div className="admin-sidebar__mobile-title">
+          <span className="admin-sidebar__brand-mark">
+            C
+          </span>
 
-      {/* ================= ADMIN ================= */}
+          <div className="admin-sidebar__brand-text">
+            <strong>College</strong>
+            <small>Management System</small>
+          </div>
+        </div>
 
-      {user?.role === "admin" && (
-        <>
+        <button
+          type="button"
+          className="admin-sidebar__close"
+          onClick={onClose}
+          aria-label="Close navigation"
+        >
+          <FaTimes />
+        </button>
+      </div>
 
-          <NavLink
-            to="/admin/dashboard"
-            className={linkClass}
-          >
-            <FaTachometerAlt className="me-2" />
-            Dashboard
-          </NavLink>
+      {/* Admin Profile */}
+      <div className="admin-sidebar__profile">
+        <FaUserCircle className="admin-sidebar__profile-icon" />
 
-          <NavLink
-            to="/admin/students"
-            className={linkClass}
-          >
-            <FaUserGraduate className="me-2" />
-            Students
-          </NavLink>
+        <div>
+          <strong>Administrator</strong>
+          <small>Admin Panel</small>
+        </div>
+      </div>
 
-          <NavLink
-            to="/admin/teachers"
-            className={linkClass}
-          >
-            <FaChalkboardTeacher className="me-2" />
-            Teachers
-          </NavLink>
-
-          <NavLink
-            to="/admin/courses"
-            className={linkClass}
-          >
-            <FaBook className="me-2" />
-            Courses
-          </NavLink>
-
-          <NavLink
-            to="/profile"
-            className={linkClass}
-          >
-            <FaUserCircle className="me-2" />
-            Profile
-          </NavLink>
-
-        </>
-      )}
-
-      {/* ================= TEACHER ================= */}
-
-      {user?.role === "teacher" && (
-        <>
-
-          <NavLink
-            to="/teacher/dashboard"
-            className={linkClass}
-          >
-            <FaTachometerAlt className="me-2" />
-            Dashboard
-          </NavLink>
-
-          <NavLink
-            to="/teacher/students"
-            className={linkClass}
-          >
-            <FaUserGraduate className="me-2" />
-            Students
-          </NavLink>
-
-          <NavLink
-            to="/teacher/attendance"
-            className={linkClass}
-          >
-            <FaClipboardCheck className="me-2" />
-            Attendance
-          </NavLink>
-
-          <NavLink
-            to="/teacher/marks"
-            className={linkClass}
-          >
-            <FaChartBar className="me-2" />
-            Marks
-          </NavLink>
-
-          <NavLink
-            to="/teacher/profile"
-            className={linkClass}
-          >
-            <FaUserCircle className="me-2" />
-            Profile
-          </NavLink>
-
-        </>
-      )}
-
-      {/* ================= STUDENT ================= */}
-
-      {user?.role === "student" && (
-        <>
-
-          <NavLink
-            to="/student/dashboard"
-            className={linkClass}
-          >
-            <FaTachometerAlt className="me-2" />
-            Dashboard
-          </NavLink>
-
-          <NavLink
-            to="/student/courses"
-            className={linkClass}
-          >
-            <FaBook className="me-2" />
-            Courses
-          </NavLink>
-
-          <NavLink
-            to="/student/attendance"
-            className={linkClass}
-          >
-            <FaClipboardCheck className="me-2" />
-            Attendance
-          </NavLink>
-
-          <NavLink
-            to="/student/marks"
-            className={linkClass}
-          >
-            <FaChartBar className="me-2" />
-            Marks
-          </NavLink>
-
-          <NavLink
-            to="/student/profile"
-            className={linkClass}
-          >
-            <FaUserCircle className="me-2" />
-            Profile
-          </NavLink>
-
-        </>
-      )}
-    </div>
+      {/* Admin Navigation */}
+      <nav
+        className="admin-sidebar__nav"
+        aria-label="Admin navigation"
+      >
+        {items.map(
+          ({ label, to, icon: Icon }) => (
+            <NavLink
+              key={label}
+              to={to}
+              onClick={onClose}
+              className={({ isActive }) =>
+                `admin-sidebar__link ${
+                  isActive ? "is-active" : ""
+                }`
+              }
+            >
+              <Icon />
+              <span>{label}</span>
+            </NavLink>
+          )
+        )}
+      </nav>
+    </aside>
   );
 }
 

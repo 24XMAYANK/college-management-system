@@ -2,8 +2,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import ProtectedRoute from "../components/ProtectedRoute";
 
-// Public Pages
-import Home from "../pages/Home";
+// ================= PUBLIC =================
+
 import Login from "../pages/Login";
 import Profile from "../pages/Profile";
 import NotFound from "../pages/NotFound";
@@ -11,18 +11,18 @@ import NotFound from "../pages/NotFound";
 // ================= ADMIN =================
 
 import AdminDashboard from "../pages/admin/Dashboard";
-
 import Students from "../pages/admin/Students";
-import AddStudent from "../pages/admin/AddStudent";
-import EditStudent from "../pages/admin/EditStudent";
-
 import Teachers from "../pages/admin/Teachers";
-import AddTeacher from "../pages/admin/AddTeacher";
-import EditTeacher from "../pages/admin/EditTeacher";
-
 import Courses from "../pages/admin/Courses";
-import AddCourse from "../pages/admin/AddCourse";
-import EditCourse from "../pages/admin/EditCourse";
+
+import Departments from "../pages/admin/Departments";
+import Fees from "../pages/admin/Fees";
+import Attendance from "../pages/admin/Attendance";
+import Exams from "../pages/admin/Exams";
+import Notices from "../pages/admin/Notices";
+import Events from "../pages/admin/Events";
+import Reports from "../pages/admin/Reports";
+import Settings from "../pages/admin/Settings";
 
 // ================= TEACHER =================
 
@@ -40,16 +40,20 @@ import StudentAttendance from "../pages/student/Attendance";
 import StudentMarks from "../pages/student/Marks";
 import StudentProfile from "../pages/student/Profile";
 
+
 function AppRoutes() {
   return (
     <BrowserRouter>
       <Routes>
 
-        {/* Public */}
+        {/* ================= PUBLIC ================= */}
 
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Login />} />
+
         <Route path="/login" element={<Login />} />
+
         <Route path="/profile" element={<Profile />} />
+
 
         {/* ================= ADMIN ================= */}
 
@@ -72,46 +76,10 @@ function AppRoutes() {
         />
 
         <Route
-          path="/admin/add-student"
-          element={
-            <ProtectedRoute role="admin">
-              <AddStudent />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/admin/edit-student/:id"
-          element={
-            <ProtectedRoute role="admin">
-              <EditStudent />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
           path="/admin/teachers"
           element={
             <ProtectedRoute role="admin">
               <Teachers />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/admin/add-teacher"
-          element={
-            <ProtectedRoute role="admin">
-              <AddTeacher />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/admin/edit-teacher/:id"
-          element={
-            <ProtectedRoute role="admin">
-              <EditTeacher />
             </ProtectedRoute>
           }
         />
@@ -125,23 +93,81 @@ function AppRoutes() {
           }
         />
 
+
+        {/* ================= NEW ADMIN MODULES ================= */}
+
         <Route
-          path="/admin/add-course"
+          path="/admin/departments"
           element={
             <ProtectedRoute role="admin">
-              <AddCourse />
+              <Departments />
             </ProtectedRoute>
           }
         />
 
         <Route
-          path="/admin/edit-course/:id"
+          path="/admin/fees"
           element={
             <ProtectedRoute role="admin">
-              <EditCourse />
+              <Fees />
             </ProtectedRoute>
           }
         />
+
+        <Route
+          path="/admin/attendance"
+          element={
+            <ProtectedRoute role="admin">
+              <Attendance />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/admin/exams"
+          element={
+            <ProtectedRoute role="admin">
+              <Exams />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/admin/notices"
+          element={
+            <ProtectedRoute role="admin">
+              <Notices />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/admin/events"
+          element={
+            <ProtectedRoute role="admin">
+              <Events />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/admin/reports"
+          element={
+            <ProtectedRoute role="admin">
+              <Reports />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/admin/settings"
+          element={
+            <ProtectedRoute role="admin">
+              <Settings />
+            </ProtectedRoute>
+          }
+        />
+
 
         {/* ================= TEACHER ================= */}
 
@@ -190,6 +216,7 @@ function AppRoutes() {
           }
         />
 
+
         {/* ================= STUDENT ================= */}
 
         <Route
@@ -237,7 +264,8 @@ function AppRoutes() {
           }
         />
 
-        {/* 404 */}
+
+        {/* ================= 404 ================= */}
 
         <Route path="*" element={<NotFound />} />
 

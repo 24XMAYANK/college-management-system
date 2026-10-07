@@ -1,122 +1,564 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Layout from "../../components/Layout";
 import API from "../../services/api";
 
-function Attendance() {
+function TeacherAttendance() {
   const [students, setStudents] = useState([]);
+  const [attendance, setAttendance] = useState([]);
+  const [date, setDate] = useState("2026-10-06");
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const [message, setMessage] = useState("");
 
-  useEffect(() => {
-    loadStudents();
-  }, []);
-
-  const loadStudents = async () => {
+  const loadData = async () => {
     try {
-      const res = await API.get("/students");
+      setLoading(true);
 
-      const data = res.data.map((student) => ({
-        ...student,
-        status: "Present",
-      }));
+      const [studentsRes, attendanceRes] = await Promise.all([
+        API.get("/students"),
+        API.get("/attendance"),
+      ]);
 
-      setStudents(data);
+      setStudents(
+        Array.isArray(studentsRes.data) ? studentsRes.data : []
+      );
+
+      setAttendance(
+        Array.isArray(attendanceRes.data)
+          ? attendanceRes.data
+          : []
+      );
     } catch (error) {
-      console.log(error);
+      console.error("Teacher attendance error:", error);
+      setMessage(
+        "Attendance data load nahi ho paya. JSON Server check karein."
+      );
+    } finally {
+      setLoading(false);
     }
   };
 
-  const changeStatus = (id, status) => {
-    const updated = students.map((student) =>
-      student.id === id ? { ...student, status } : student
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  const recordsForDate = useMemo(() => {
+    return attendance.filter((item) => item.date === date);
+  }, [attendance, date]);
+
+  const statusForStudent = (studentId) => {
+    const record = recordsForDate.find(
+      (item) =>
+        String(item.studentId) === String(studentId)
     );
 
-    setStudents(updated);
+    return record?.status || "Present";
   };
 
-  const saveAttendance = () => {
-    alert("Attendance Saved Successfully");
-    console.log(students);
+  const setStatus = (studentId, status) => {
+    setAttendance((current) => {
+      const existing = current.find(
+        (item) =>
+          String(item.studentId) === String(studentId) &&
+          item.date === date
+      );
+
+      if (existing) {
+        return current.map((item) =>
+          item.id === existing.id
+            ? { ...item, status }
+            : item
+        );
+      }
+
+      return [
+        ...current,
+        {
+          id: `local-${studentId}-${date}`,
+          studentId: String(studentId),
+          date,
+          status,
+        },
+      ];
+    });
   };
+
+  const saveAttendance = async () => {
+    try {
+      setSaving(true);
+      setMessage("");
+
+      for (const student of students) {
+        const status = statusForStudent(student.id);
+
+        const existing = attendance.find(
+          (item) =>
+            String(item.studentId) === String(student.id) &&
+            item.date === date
+        );
+
+        if (
+          existing &&
+          !String(existing.id).startsWith("local-")
+        ) {
+          await API.patch(
+            `/attendance/${existing.id}`,
+            {
+              status,
+            }
+          );
+        } else {
+          await API.post("/attendance", {
+            studentId: String(student.id),
+            date,
+            status,
+          });
+        }
+      }
+
+      await loadData();
+
+      setMessage(
+        `Attendance successfully saved for ${date}.`
+      );
+    } catch (error) {
+      console.error("Save attendance error:", error);
+
+      setMessage(
+        "Attendance save nahi ho paya."
+      );
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const presentCount = students.filter(
+    (student) =>
+      statusForStudent(student.id) === "Present"
+  ).length;
+
+  const absentCount =
+    students.length - presentCount;
+
+  const percentage = students.length
+    ? Math.round(
+        (presentCount / students.length) * 100
+      )
+    : 0;
 
   return (
-    <Layout>
-      <div className="container-fluid">
+    <Layout variant="teacher">
+      <div className="cms-page-shell">
 
-        <div className="d-flex justify-content-between mb-4">
+        <div className="cms-page-header">
+          <div>
+            <span className="cms-page-eyebrow">
+              TEACHER PORTAL
+            </span>
 
-          <h2>Attendance Management</h2>
+            <h1>Attendance</h1>
 
-          <button
-            className="btn btn-success"
-            onClick={saveAttendance}
-          >
-            Save Attendance
-          </button>
+            <p>
+              Students ki daily attendance yahin se
+              manage karein.
+            </p>
+          </div>
+
+          <div className="cms-page-actions">
+            <input
+              type="date"
+              value={date}
+              onChange={(e) =>
+                setDate(e.target.value)
+              }
+            />
+
+            <button
+              type="button"
+              onClick={saveAttendance}
+              disabled={saving}
+            >
+              {saving
+                ? "Saving..."
+                : "Save Attendance"}
+            </button>
+          </div>
+        </div>
+
+        {message && (
+          <div className="cms-message">
+            {message}
+          </div>
+        )}
+
+        <div className="cms-stat-grid">
+
+          <div className="cms-stat-card">
+            <span>Total Students</span>
+            <strong>
+              {students.length}
+            </strong>
+          </div>
+
+          <div className="cms-stat-card">
+            <span>Present</span>
+            <strong>
+              {presentCount}
+            </strong>
+          </div>
+
+          <div className="cms-stat-card">
+            <span>Absent</span>
+            <strong>
+              {absentCount}
+            </strong>
+          </div>
+
+          <div className="cms-stat-card">
+            <span>Attendance</span>
+            <strong>
+              {percentage}%
+            </strong>
+          </div>
 
         </div>
 
-        <div className="card shadow">
+        <section className="cms-card">
 
-          <div className="card-body">
+          <div className="cms-card-header">
+            <h2>
+              Student Attendance
+            </h2>
 
-            <div className="table-responsive">
+            <span>
+              {date}
+            </span>
+          </div>
 
-              <table className="table table-bordered table-hover">
+          {loading ? (
+            <div className="cms-empty">
+              Loading attendance...
+            </div>
+          ) : (
+            <div className="cms-table-wrap">
 
-                <thead className="table-dark">
+              <table className="cms-table">
 
+                <thead>
                   <tr>
                     <th>ID</th>
-                    <th>Name</th>
+                    <th>Student</th>
+                    <th>Email</th>
                     <th>Course</th>
-                    <th>Attendance</th>
+                    <th>Status</th>
                   </tr>
-
                 </thead>
 
                 <tbody>
 
-                  {students.map((student) => (
+                  {students.map((student) => {
+                    const status =
+                      statusForStudent(
+                        student.id
+                      );
 
-                    <tr key={student.id}>
+                    return (
+                      <tr key={student.id}>
 
-                      <td>{student.id}</td>
+                        <td>
+                          ST
+                          {String(student.id).padStart(
+                            3,
+                            "0"
+                          )}
+                        </td>
 
-                      <td>{student.name}</td>
+                        <td>
+                          <strong>
+                            {student.name}
+                          </strong>
+                        </td>
 
-                      <td>{student.course}</td>
+                        <td>
+                          {student.email}
+                        </td>
 
-                      <td>
+                        <td>
+                          {student.course}
+                        </td>
 
-                        <select
-                          className="form-select"
-                          value={student.status}
-                          onChange={(e) =>
-                            changeStatus(student.id, e.target.value)
-                          }
-                        >
-                          <option>Present</option>
-                          <option>Absent</option>
-                        </select>
+                        <td>
 
-                      </td>
+                          <div className="cms-status-buttons">
 
-                    </tr>
+                            <button
+                              type="button"
+                              className={
+                                status === "Present"
+                                  ? "active"
+                                  : ""
+                              }
+                              onClick={() =>
+                                setStatus(
+                                  student.id,
+                                  "Present"
+                                )
+                              }
+                            >
+                              Present
+                            </button>
 
-                  ))}
+                            <button
+                              type="button"
+                              className={
+                                status === "Absent"
+                                  ? "active absent"
+                                  : ""
+                              }
+                              onClick={() =>
+                                setStatus(
+                                  student.id,
+                                  "Absent"
+                                )
+                              }
+                            >
+                              Absent
+                            </button>
+
+                          </div>
+
+                        </td>
+
+                      </tr>
+                    );
+                  })}
 
                 </tbody>
 
               </table>
 
             </div>
+          )}
 
-          </div>
-
-        </div>
+        </section>
 
       </div>
+
+      <style>{`
+        .cms-page-shell {
+          padding: 24px;
+          max-width: 1500px;
+          margin: 0 auto;
+        }
+
+        .cms-page-header {
+          display: flex;
+          justify-content: space-between;
+          gap: 20px;
+          align-items: flex-end;
+          margin-bottom: 22px;
+        }
+
+        .cms-page-eyebrow {
+          font-size: 11px;
+          font-weight: 800;
+          letter-spacing: 1.5px;
+          color: #6477d9;
+        }
+
+        .cms-page-header h1 {
+          margin: 7px 0;
+          font-size: 32px;
+          color: #18243b;
+        }
+
+        .cms-page-header p {
+          margin: 0;
+          color: #7c879c;
+        }
+
+        .cms-page-actions {
+          display: flex;
+          gap: 10px;
+          align-items: center;
+        }
+
+        .cms-page-actions input {
+          padding: 11px 13px;
+          border: 1px solid #e2e6ef;
+          border-radius: 10px;
+          background: #fff;
+        }
+
+        .cms-page-actions button {
+          padding: 11px 17px;
+          border: 0;
+          border-radius: 10px;
+          background: #5e72dc;
+          color: #fff;
+          font-weight: 700;
+          cursor: pointer;
+        }
+
+        .cms-page-actions button:disabled {
+          opacity: 0.6;
+          cursor: not-allowed;
+        }
+
+        .cms-message {
+          padding: 12px 15px;
+          border-radius: 10px;
+          background: #eef3ff;
+          color: #5368c9;
+          margin-bottom: 18px;
+        }
+
+        .cms-stat-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 16px;
+          margin-bottom: 20px;
+        }
+
+        .cms-stat-card,
+        .cms-card {
+          background: #fff;
+          border: 1px solid #e9ecf2;
+          border-radius: 16px;
+          box-shadow: 0 5px 20px rgba(25,35,55,.04);
+        }
+
+        .cms-stat-card {
+          padding: 20px;
+        }
+
+        .cms-stat-card span {
+          display: block;
+          color: #78839a;
+          font-size: 13px;
+          margin-bottom: 8px;
+        }
+
+        .cms-stat-card strong {
+          font-size: 27px;
+          color: #17233a;
+        }
+
+        .cms-card {
+          overflow: hidden;
+        }
+
+        .cms-card-header {
+          padding: 20px 22px;
+          border-bottom: 1px solid #edf0f5;
+          display: flex;
+          justify-content: space-between;
+        }
+
+        .cms-card-header h2 {
+          margin: 0;
+          font-size: 18px;
+          color: #1d2940;
+        }
+
+        .cms-card-header span {
+          color: #7c879c;
+          font-size: 13px;
+        }
+
+        .cms-table-wrap {
+          overflow-x: auto;
+        }
+
+        .cms-table {
+          width: 100%;
+          border-collapse: collapse;
+          min-width: 850px;
+        }
+
+        .cms-table th,
+        .cms-table td {
+          padding: 14px 18px;
+          text-align: left;
+          border-bottom: 1px solid #edf0f5;
+          font-size: 13px;
+        }
+
+        .cms-table th {
+          background: #fafbfc;
+          color: #7d8799;
+          font-size: 11px;
+          text-transform: uppercase;
+        }
+
+        .cms-table td {
+          color: #59657b;
+        }
+
+        .cms-table td strong {
+          color: #26334b;
+        }
+
+        .cms-status-buttons {
+          display: flex;
+          gap: 7px;
+        }
+
+        .cms-status-buttons button {
+          border: 1px solid #dfe4ed;
+          background: #fff;
+          padding: 7px 11px;
+          border-radius: 8px;
+          color: #68748a;
+          cursor: pointer;
+        }
+
+        .cms-status-buttons button.active {
+          background: #e8f7ef;
+          border-color: #b8e4c9;
+          color: #278450;
+          font-weight: 700;
+        }
+
+        .cms-status-buttons button.active.absent {
+          background: #fff0f1;
+          border-color: #f1c4c8;
+          color: #d04e59;
+        }
+
+        .cms-empty {
+          padding: 45px;
+          text-align: center;
+          color: #8994a8;
+        }
+
+        @media (max-width: 800px) {
+          .cms-page-header {
+            flex-direction: column;
+            align-items: stretch;
+          }
+
+          .cms-page-actions {
+            flex-wrap: wrap;
+          }
+
+          .cms-stat-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+
+        @media (max-width: 480px) {
+          .cms-stat-grid {
+            grid-template-columns: 1fr;
+          }
+
+          .cms-page-shell {
+            padding: 14px;
+          }
+        }
+      `}</style>
     </Layout>
   );
 }
 
-export default Attendance;
+export default TeacherAttendance;

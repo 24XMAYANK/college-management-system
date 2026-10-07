@@ -22,13 +22,196 @@
       "year": "3rd"
     },
     {
+      "id": "4",
       "name": "Mayank Patel",
       "email": "maayaankpatel24@gmail.com",
-      "course": "bsc",
-      "year": "3rd",
-      "id": "ifnkIuMipqo"
+      "course": "BSc IT",
+      "year": "3rd"
+    },
+    {
+      "id": "5",
+      "name": "Neha Joshi",
+      "email": "neha@gmail.com",
+      "course": "BCA",
+      "year": "1st"
+    },
+    {
+      "id": "6",
+      "name": "Karan Mehta",
+      "email": "karan@gmail.com",
+      "course": "BBA",
+      "year": "2nd"
+    },
+    {
+      "id": "7",
+      "name": "Sneha Desai",
+      "email": "sneha@gmail.com",
+      "course": "BCom",
+      "year": "1st"
+    },
+    {
+      "id": "8",
+      "name": "Yash Shah",
+      "email": "yash@gmail.com",
+      "course": "BSc IT",
+      "year": "3rd"
+    },
+    {
+      "id": "9",
+      "name": "Riya Patel",
+      "email": "riya@gmail.com",
+      "course": "BCA",
+      "year": "2nd"
+    },
+    {
+      "id": "10",
+      "name": "Harsh Mehta",
+      "email": "harsh@gmail.com",
+      "course": "BBA",
+      "year": "1st"
+    },
+    {
+      "id": "11",
+      "name": "Pooja Shah",
+      "email": "pooja@gmail.com",
+      "course": "BCom",
+      "year": "2nd"
+    },
+    {
+      "id": "12",
+      "name": "Dhruv Patel",
+      "email": "dhruv@gmail.com",
+      "course": "BSc IT",
+      "year": "1st"
+    },
+    {
+      "id": "13",
+      "name": "Anjali Desai",
+      "email": "anjali@gmail.com",
+      "course": "BCA",
+      "year": "3rd"
+    },
+    {
+      "id": "14",
+      "name": "Vivek Joshi",
+      "email": "vivek@gmail.com",
+      "course": "BBA",
+      "year": "2nd"
+    },
+    {
+      "id": "15",
+      "name": "Komal Shah",
+      "email": "komal@gmail.com",
+      "course": "BCom",
+      "year": "3rd"
+    },
+    {
+      "id": "16",
+      "name": "Akash Patel",
+      "email": "akash@gmail.com",
+      "course": "BSc IT",
+      "year": "2nd"
+    },
+    {
+      "id": "17",
+      "name": "Nisha Mehta",
+      "email": "nisha@gmail.com",
+      "course": "BCA",
+      "year": "1st"
+    },
+    {
+      "id": "18",
+      "name": "Rohan Shah",
+      "email": "rohan@gmail.com",
+      "course": "BBA",
+      "year": "3rd"
+    },
+    {
+      "id": "19",
+      "name": "Simran Patel",
+      "email": "simran@gmail.com",
+      "course": "BCom",
+      "year": "2nd"
+    },
+    {
+      "id": "20",
+      "name": "Manav Desai",
+      "email": "manav@gmail.com",
+      "course": "BSc IT",
+      "year": "3rd"
+    },
+    {
+      "id": "21",
+      "name": "Isha Joshi",
+      "email": "isha@gmail.com",
+      "course": "BCA",
+      "year": "2nd"
+    },
+    {
+      "id": "22",
+      "name": "Arjun Mehta",
+      "email": "arjun@gmail.com",
+      "course": "BBA",
+      "year": "1st"
+    },
+    {
+      "id": "23",
+      "name": "Tanvi Shah",
+      "email": "tanvi@gmail.com",
+      "course": "BCom",
+      "year": "1st"
+    },
+    {
+      "id": "24",
+      "name": "Dev Patel",
+      "email": "dev@gmail.com",
+      "course": "BSc IT",
+      "year": "2nd"
+    },
+    {
+      "id": "25",
+      "name": "Aarav Desai",
+      "email": "aarav@gmail.com",
+      "course": "BCA",
+      "year": "3rd"
+    },
+    {
+      "id": "26",
+      "name": "Mahi Shah",
+      "email": "mahi@gmail.com",
+      "course": "BBA",
+      "year": "2nd"
+    },
+    {
+      "id": "27",
+      "name": "Raj Patel",
+      "email": "raj@gmail.com",
+      "course": "BCom",
+      "year": "3rd"
+    },
+    {
+      "id": "28",
+      "name": "Kavya Mehta",
+      "email": "kavya@gmail.com",
+      "course": "BSc IT",
+      "year": "1st"
+    },
+    {
+      "id": "29",
+      "name": "Sahil Joshi",
+      "email": "sahil@gmail.com",
+      "course": "BCA",
+      "year": "1st"
+    },
+    {
+      "id": "30",
+      "name": "Ayesha Khan",
+      "email": "ayesha@gmail.com",
+      "course": "BBA",
+      "year": "3rd"
     }
   ],
+
   "teachers": [
     {
       "id": "1",
@@ -43,8 +226,30 @@
       "email": "meena@gmail.com",
       "subject": "Java",
       "experience": "7 Years"
+    },
+    {
+      "id": "3",
+      "name": "Amit Sir",
+      "email": "amitsir@gmail.com",
+      "subject": "Database",
+      "experience": "6 Years"
+    },
+    {
+      "id": "4",
+      "name": "Priya Madam",
+      "email": "priyamadam@gmail.com",
+      "subject": "Accounting",
+      "experience": "8 Years"
+    },
+    {
+      "id": "5",
+      "name": "Rakesh Sir",
+      "email": "rakeshsir@gmail.com",
+      "subject": "Business Studies",
+      "experience": "10 Years"
     }
   ],
+
   "courses": [
     {
       "id": "1",
@@ -63,7 +268,350 @@
       "name": "BCom",
       "duration": "3 Years",
       "fees": 40000
+    },
+    {
+      "id": "4",
+      "name": "BBA",
+      "duration": "3 Years",
+      "fees": 55000
     }
   ],
-  "$schema": "./node_modules/json-server/schema.json"
+
+  "attendance": [
+    {
+      "id": "a1",
+      "studentId": "1",
+      "date": "2026-10-05",
+      "status": "Present"
+    },
+    {
+      "id": "a2",
+      "studentId": "1",
+      "date": "2026-10-06",
+      "status": "Present"
+    },
+    {
+      "id": "a3",
+      "studentId": "1",
+      "date": "2026-10-04",
+      "status": "Absent"
+    },
+    {
+      "id": "a4",
+      "studentId": "1",
+      "date": "2026-10-03",
+      "status": "Present"
+    },
+    {
+      "id": "a5",
+      "studentId": "2",
+      "date": "2026-10-05",
+      "status": "Present"
+    },
+    {
+      "id": "a6",
+      "studentId": "2",
+      "date": "2026-10-06",
+      "status": "Present"
+    },
+    {
+      "id": "a7",
+      "studentId": "2",
+      "date": "2026-10-04",
+      "status": "Present"
+    },
+    {
+      "id": "a8",
+      "studentId": "2",
+      "date": "2026-10-03",
+      "status": "Present"
+    },
+    {
+      "id": "a9",
+      "studentId": "3",
+      "date": "2026-10-05",
+      "status": "Present"
+    },
+    {
+      "id": "a10",
+      "studentId": "3",
+      "date": "2026-10-06",
+      "status": "Absent"
+    },
+    {
+      "id": "a11",
+      "studentId": "3",
+      "date": "2026-10-04",
+      "status": "Present"
+    },
+    {
+      "id": "a12",
+      "studentId": "3",
+      "date": "2026-10-03",
+      "status": "Present"
+    },
+    {
+      "id": "a13",
+      "studentId": "4",
+      "date": "2026-10-05",
+      "status": "Present"
+    },
+    {
+      "id": "a14",
+      "studentId": "4",
+      "date": "2026-10-06",
+      "status": "Present"
+    },
+    {
+      "id": "a15",
+      "studentId": "4",
+      "date": "2026-10-04",
+      "status": "Present"
+    },
+    {
+      "id": "a16",
+      "studentId": "4",
+      "date": "2026-10-03",
+      "status": "Absent"
+    }
+  ],
+
+  "marks": [
+    {
+      "id": "m1",
+      "studentId": "1",
+      "subject": "ReactJS",
+      "exam": "Internal Exam",
+      "marks": 86,
+      "total": 100
+    },
+    {
+      "id": "m2",
+      "studentId": "1",
+      "subject": "Java",
+      "exam": "Internal Exam",
+      "marks": 78,
+      "total": 100
+    },
+    {
+      "id": "m3",
+      "studentId": "1",
+      "subject": "Database",
+      "exam": "Internal Exam",
+      "marks": 88,
+      "total": 100
+    },
+    {
+      "id": "m4",
+      "studentId": "2",
+      "subject": "ReactJS",
+      "exam": "Internal Exam",
+      "marks": 82,
+      "total": 100
+    },
+    {
+      "id": "m5",
+      "studentId": "2",
+      "subject": "Java",
+      "exam": "Internal Exam",
+      "marks": 84,
+      "total": 100
+    },
+    {
+      "id": "m6",
+      "studentId": "2",
+      "subject": "Database",
+      "exam": "Internal Exam",
+      "marks": 79,
+      "total": 100
+    },
+    {
+      "id": "m7",
+      "studentId": "3",
+      "subject": "Accounting",
+      "exam": "Internal Exam",
+      "marks": 91,
+      "total": 100
+    },
+    {
+      "id": "m8",
+      "studentId": "3",
+      "subject": "Business Studies",
+      "exam": "Internal Exam",
+      "marks": 87,
+      "total": 100
+    },
+    {
+      "id": "m9",
+      "studentId": "3",
+      "subject": "Economics",
+      "exam": "Internal Exam",
+      "marks": 89,
+      "total": 100
+    },
+    {
+      "id": "m10",
+      "studentId": "4",
+      "subject": "ReactJS",
+      "exam": "Internal Exam",
+      "marks": 76,
+      "total": 100
+    },
+    {
+      "id": "m11",
+      "studentId": "4",
+      "subject": "Java",
+      "exam": "Internal Exam",
+      "marks": 81,
+      "total": 100
+    },
+    {
+      "id": "m12",
+      "studentId": "4",
+      "subject": "Database",
+      "exam": "Internal Exam",
+      "marks": 83,
+      "total": 100
+    }
+  ],
+
+  "exams": [
+    {
+      "id": "e1",
+      "name": "Mid Semester Examination",
+      "course": "BCA",
+      "date": "2026-10-12",
+      "type": "Internal"
+    },
+    {
+      "id": "e2",
+      "name": "Internal Assessment",
+      "course": "BSc IT",
+      "date": "2026-10-18",
+      "type": "Internal"
+    },
+    {
+      "id": "e3",
+      "name": "Semester Examination",
+      "course": "All Courses",
+      "date": "2026-11-02",
+      "type": "Semester"
+    }
+  ],
+
+  "notices": [
+    {
+      "id": "n1",
+      "title": "College Holiday",
+      "message": "College will remain closed on 8th October 2026.",
+      "date": "2026-10-06",
+      "type": "General"
+    },
+    {
+      "id": "n2",
+      "title": "Internal Exam Schedule",
+      "message": "Internal examination schedule has been released.",
+      "date": "2026-10-06",
+      "type": "Exam"
+    },
+    {
+      "id": "n3",
+      "title": "Library Timing",
+      "message": "Library timing has been updated for students.",
+      "date": "2026-10-05",
+      "type": "Academic"
+    },
+    {
+      "id": "n4",
+      "title": "Admission Process",
+      "message": "New admission process is now open.",
+      "date": "2026-10-04",
+      "type": "Admission"
+    }
+  ],
+
+  "events": [
+    {
+      "id": "ev1",
+      "name": "Annual Sports Day",
+      "date": "2026-10-14",
+      "location": "College Ground"
+    },
+    {
+      "id": "ev2",
+      "name": "Cultural Fest",
+      "date": "2026-10-21",
+      "location": "Main Auditorium"
+    },
+    {
+      "id": "ev3",
+      "name": "Guest Lecture",
+      "date": "2026-10-28",
+      "location": "Seminar Hall"
+    }
+  ],
+
+  "fees": [
+    {
+      "id": "f1",
+      "studentId": "1",
+      "studentName": "Rahul Sharma",
+      "course": "BCA",
+      "total": 50000,
+      "paid": 35000,
+      "due": 15000,
+      "status": "Partial"
+    },
+    {
+      "id": "f2",
+      "studentId": "2",
+      "studentName": "Amit Patel",
+      "course": "BSc IT",
+      "total": 60000,
+      "paid": 60000,
+      "due": 0,
+      "status": "Paid"
+    },
+    {
+      "id": "f3",
+      "studentId": "3",
+      "studentName": "Priya Shah",
+      "course": "BCom",
+      "total": 40000,
+      "paid": 20000,
+      "due": 20000,
+      "status": "Partial"
+    },
+    {
+      "id": "f4",
+      "studentId": "4",
+      "studentName": "Mayank Patel",
+      "course": "BSc IT",
+      "total": 60000,
+      "paid": 45000,
+      "due": 15000,
+      "status": "Partial"
+    }
+  ],
+
+    "departments": [
+    {
+      "id": "d1",
+      "name": "Computer Science",
+      "head": "Rajesh Sir",
+      "description": "Department for computer science and information technology programs."
+    },
+    {
+      "id": "d2",
+      "name": "Commerce",
+      "head": "Priya Madam",
+      "description": "Department for commerce, accounting and business studies."
+    },
+    {
+      "id": "d3",
+      "name": "Management",
+      "head": "Rakesh Sir",
+      "description": "Department for business administration and management studies."
+    }
+  ]
 }

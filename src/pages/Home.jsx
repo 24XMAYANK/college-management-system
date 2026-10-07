@@ -6,14 +6,6 @@ function Home() {
 
       <div className="text-center">
 
-        <h1 className="mb-3 text-primary">
-          College Management System
-        </h1>
-
-        <p className="lead">
-          Welcome to College Management System
-        </p>
-
         <Link
           to="/login"
           className="btn btn-primary mt-3"

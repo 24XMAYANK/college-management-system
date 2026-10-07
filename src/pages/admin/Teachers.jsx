@@ -42,7 +42,7 @@ function Teachers() {
   );
 
   return (
-    <Layout>
+    <Layout variant="admin">
       <div className="d-flex justify-content-between align-items-center mb-4">
         <h2>Teachers Management</h2>
 
